@@ -1,0 +1,45 @@
+WORLD:
+	HAS:
+	-> List of cars 
+		-> every VEHICLE in the game
+	
+	-> List of roads
+	
+	-> Intersection
+	
+	-> Traffic Control
+	
+	DOES:
+	
+	-> UPDATE:
+		-> Update Traffic Control
+		-> Update Car
+			
+
+VEHICLE:
+	HAS:
+	-> Reference to current roads
+	
+	DOES:
+	-> UPDATE/MOVE
+		-> Check state of traffic lights
+	
+		-> Use Intelligent driving model to calculate new position
+		
+ROAD:
+	HAS:
+	-> Traffic light 
+	
+	DOES:
+	-> Change from Red/Amber/Greenm
+	
+	
+TRAFFIC CONTROL:
+	HAS:
+	-> ROADS
+	
+	-> Timer
+	
+	DOES:
+	-> UPDATE:
+		-> Should lights change color
