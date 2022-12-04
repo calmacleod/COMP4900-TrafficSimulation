@@ -12,3 +12,8 @@ class Road:
     def add_vehicle(self,vehicle):
         self.vehicles.append(vehicle)
 
+    def get_last_vehicle(self):
+        if(self.vehicles == []):
+            return None
+        return self.vehicles[-1]
+

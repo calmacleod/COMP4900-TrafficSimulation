@@ -14,17 +14,20 @@ class World:
         return r
 
     def add_vehicle(self, road):
-        self.vehicles.append(Vehicle(road))
+        self.vehicles.append(Vehicle(road,road.get_last_vehicle()))
 
     def update(self):
         self.tick += 1
 
-        if(self.tick % 10 == 0):
+        if(self.tick == 1):
+            self.add_vehicle(random.choice(self.roads))
+
+        if(self.tick == 50):
             self.add_vehicle(random.choice(self.roads))
 
         for v in self.vehicles:
             #TODO - Implement update
-            v.updatePosition()
+            v.update()
     
     def get_finished(self):
         people = 0
