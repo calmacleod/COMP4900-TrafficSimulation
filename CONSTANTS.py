@@ -1,0 +1,1 @@
+ROAD_WIDTH = 30

@@ -1,11 +1,13 @@
 from Road import Road
 from Vehicle import Vehicle
+from Intersection import Intersection
 import random
 class World:
     def __init__(self):
             self.vehicles = []
             self.done_vehicles = []
             self.roads    = []
+            self.intersections = []
             self.tick     = 0
 
     def add_road(self,start,end):
@@ -14,7 +16,9 @@ class World:
         return r
 
     def add_vehicle(self, road):
-        self.vehicles.append(Vehicle(road,road.get_last_vehicle()))
+        v = Vehicle(road,road.get_last_vehicle())
+        self.vehicles.append(v)
+        road.add_vehicle(v)
 
     def update(self):
         self.tick += 1
@@ -34,3 +38,6 @@ class World:
         for v in self.done_vehicles:
             people += v.capacity
         return people 
+
+    def add_intersection(self,road1,road2):
+        self.intersections.append(Intersection(road1,road2))

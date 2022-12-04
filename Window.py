@@ -1,4 +1,5 @@
 import pygame
+import CONSTANTS
 from World import World
 from Road  import Road
 class Window:
@@ -38,7 +39,9 @@ class Window:
             self.draw()
 
             pygame.display.update()
-            clock.tick(self.fps)
+            #clock.tick(self.fps)
+            clock.tick(10)
+
 
             #Handle events
             for event in pygame.event.get():
@@ -98,6 +101,24 @@ class Window:
 
         self.screen.blit(text,text_rect)
 
+    def draw_lights(self):
+        width = 30
+        light_size = 10
+        for r in self.world.roads:
+            for light in r.lights:
+                if(r.direction == 1):
+                    xPos = light.position + width//2
+                    yPos = r.offset - width//2
+                    length = light_size
+                    light_rect = pygame.Rect(xPos,yPos,length,width)
+                    pygame.draw.rect(self.screen,pygame.Color(light.get_rgb()), light_rect)
+                if(r.direction == 2):
+                    yPos = light.position + width//2
+                    xPos = r.offset - width//2
+                    length = light_size
+                    light_rect = pygame.Rect(xPos,yPos,width,length)
+
+                    pygame.draw.rect(self.screen,pygame.Color(light.get_rgb()), light_rect)
     def draw(self):
         self.draw_background()
         # Draw roads
@@ -106,6 +127,8 @@ class Window:
         self.draw_stats()
 
         self.draw_roads()
+
+        self.draw_lights()
 
         self.draw_cars()
 

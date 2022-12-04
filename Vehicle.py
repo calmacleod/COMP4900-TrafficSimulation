@@ -14,7 +14,7 @@ class Vehicle:
         self.l = 40
         
         self.s0 = 3
-        self.v_max = 10
+        self.v_max = 5
         self.v = self.v_max
 
         if not self.first_car:
@@ -33,7 +33,7 @@ class Vehicle:
     def update_acceleration(self):
         # - Update based on lead car
         if not self.first_car:
-            self.s = self.pos - self.lead.pos - self.l
+            self.s = self.lead.pos - self.pos -  - self.l
             self.diff_v = self.v - self.lead.v
 
         #Perform accleration calculation

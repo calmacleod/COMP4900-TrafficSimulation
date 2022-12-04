@@ -4,6 +4,7 @@ class Road:
         self.direction = direction
         self.offset = offset
         self.vehicles = []
+        self.lights   = []
 
     #TODO Implement
     def update(self):
@@ -17,3 +18,5 @@ class Road:
             return None
         return self.vehicles[-1]
 
+    def add_traffic_light(self, light):
+        self.lights.append(light)
