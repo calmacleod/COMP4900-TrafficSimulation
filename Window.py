@@ -40,7 +40,7 @@ class Window:
 
             pygame.display.update()
             #clock.tick(self.fps)
-            clock.tick(10)
+            clock.tick(60)
 
 
             #Handle events
@@ -85,7 +85,12 @@ class Window:
                 yPos = v.pos
                 length = v.l
                 vehicleRect = pygame.Rect(xPos,yPos,30,length)
-            pygame.draw.rect(self.screen,pygame.Color(18, 39, 148), vehicleRect)
+
+            if(v.first_car):
+                color = pygame.Color(18, 39, 148)
+            else:
+                color = pygame.Color(235, 52, 82)
+            pygame.draw.rect(self.screen,color, vehicleRect)
 
     def draw_stats(self):
         ticks = self.world.tick

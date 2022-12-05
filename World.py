@@ -26,7 +26,7 @@ class World:
         if(self.tick == 1):
             self.add_vehicle(random.choice(self.roads))
 
-        if(self.tick == 50):
+        if(self.tick == 30):
             self.add_vehicle(random.choice(self.roads))
 
         for v in self.vehicles:

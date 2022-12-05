@@ -13,7 +13,7 @@ class Vehicle:
         self.x = 0
         self.l = 40
         
-        self.s0 = 3
+        self.s0 = 90
         self.v_max = 5
         self.v = self.v_max
 
@@ -40,11 +40,10 @@ class Vehicle:
         sStar = self.s0 + (self.v * self.T) + ((self.v * self.diff_v) / self.root_constant)
 
         a_free_road = self.a * (1- (self.v / self.v_max)**self.delta)
-        a_interatcion = self.a * (sStar / self.s)**2
+        a_interatcion = -self.a * (sStar / self.s)**2
 
         acc = a_free_road + a_interatcion
 
-        print("A_FREE_ROAD: " + str(a_free_road) + " A_INTERACTION: "+ str(a_interatcion))
 
         #acc = self.a * (1- (self.v / self.v_max)**self.delta - (sStar / self.s)**2)
         
