@@ -1,4 +1,5 @@
 from TrafficLight import TrafficLight
+from TrafficControl import *
 
 class Intersection:
     def __init__(self,road_1,road_2):
@@ -26,4 +27,12 @@ class Intersection:
 
         road_1.add_traffic_light(road_1_light)
         road_2.add_traffic_light(road_2_light)
+
+        self.control = TrafficControl()
+        self.control.add_light(road_1_light)
+        self.control.add_light(road_2_light)
+        self.control.prep_intersection()
+
+    def update(self):
+        self.control.update()
             

@@ -1,4 +1,5 @@
 from enum import Enum
+import CONSTANTS
 
 class TrafficLight:
     def __init__(self,position):
@@ -10,6 +11,9 @@ class TrafficLight:
 
     def set_state(self, new_state):
         self.state = new_state
+
+    def get_stop_distance(self):
+        return self.position - CONSTANTS.ROAD_WIDTH//2 
 
     def get_rgb(self):
         if(self.state == LIGHT_COLOR.RED):
