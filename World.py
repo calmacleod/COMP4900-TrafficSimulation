@@ -33,13 +33,13 @@ class World:
     def update(self):
         self.tick += 1
 
-        '''
+        # '''
         if(self.tick == 1):
             self.add_vehicle(random.choice(self.roads))
 
         if(self.tick % 30 == 0):
             self.add_vehicle(random.choice(self.roads))
-        '''
+        # '''
 
         for i in self.intersections:
             i.update()

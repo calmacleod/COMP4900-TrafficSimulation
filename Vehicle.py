@@ -1,4 +1,5 @@
 import math
+from TrafficLight import LIGHT_COLOR
 
 class Vehicle:
     def __init__(self, road, lead = None):
@@ -35,6 +36,24 @@ class Vehicle:
         if not self.first_car:
             self.s = self.lead.pos - self.pos -  - self.l
             self.diff_v = self.v - self.lead.v
+        else:
+            self.s = 1000
+            self.diff_v = 0
+
+        if (self.road.lights[0].get_state() == LIGHT_COLOR.RED and self.pos < self.road.lights[0].position):
+            if self.first_car:
+                self.s = self.road.lights[0].position - self.pos - 5
+                self.diff_v = self.v
+            elif (self.road.lights[0].position - self.pos) < (self.lead.pos - self.pos):
+                self.s = self.road.lights[0].position - self.pos - 5
+                self.diff_v = self.v
+
+        # If (Light yellow & V^2 / 2b > distance to light):
+        if (self.road.lights[0].get_state() == LIGHT_COLOR.AMBER and self.pos < self.road.lights[0].position):
+            if (self.v**2 / 2*self.b) > (self.road.lights[0].position - self.pos):
+                self.s = self.road.lights[0].position - self.pos - 5
+                self.diff_v = self.v
+
 
         #Perform accleration calculation
         sStar = self.s0 + (self.v * self.T) + ((self.v * self.diff_v) / self.root_constant)
@@ -43,9 +62,6 @@ class Vehicle:
         a_interatcion = -self.a * (sStar / self.s)**2
 
         acc = a_free_road + a_interatcion
-
-
-        #acc = self.a * (1- (self.v / self.v_max)**self.delta - (sStar / self.s)**2)
         
         return acc
     
@@ -57,10 +73,4 @@ class Vehicle:
         if(self.v <= 0):
             self.v = 0
 
-        if(self.pos >= 500):
-            self.v = 0
-
         self.pos += self.v
-
-       
-
