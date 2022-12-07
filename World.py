@@ -47,7 +47,6 @@ class World:
 
         for r in self.roads:
             r.update()
-            r.clear_vehicles()
 
             
 
