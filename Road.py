@@ -37,10 +37,9 @@ class Road:
     def add_traffic_light(self, light):
         self.lights.append(light)
 
-    def can_create_car(self):
-        for v in self.vehicles:
-            if(v.pos < v.l):
-                return False
+    def can_create_car(self,length):
+        if(len(self.vehicles) > 0):
+            return self.vehicles[-1].pos >= length
         return True
 
     def vehicle_finished(self, vehicle):
