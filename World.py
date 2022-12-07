@@ -1,5 +1,7 @@
 from Road import Road
 from Vehicle import Vehicle
+from Bus import Bus
+from Car import Car
 from Intersection import Intersection
 import CONSTANTS
 import random
@@ -17,7 +19,12 @@ class World:
         return r
 
     def add_vehicle(self, road):
-        v = Vehicle(road,road.get_last_vehicle())
+        #Chance of bus
+        busProb = random.randrange(1,100)
+        if(busProb < 10):
+            v = Bus(road,road.get_last_vehicle())
+        else:
+            v = Car(road,road.get_last_vehicle())
         self.vehicles.append(v)
         road.add_vehicle(v)
 
