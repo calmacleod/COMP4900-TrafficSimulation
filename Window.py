@@ -96,7 +96,10 @@ class Window:
         ticks = self.world.tick
         pplDone = self.world.get_finished()
 
-        out_string = "Ticks: " + str(ticks) + " People Travelled: " + str(pplDone)
+        out_string = "Ticks: " + str(ticks)
+        
+        for r in self.world.roads:
+            out_string += " ppl_Trav: " + str(r.travelled)
 
         text = self.text_font.render(out_string,False, (0,0,0)) 
 
@@ -124,6 +127,7 @@ class Window:
                     light_rect = pygame.Rect(xPos,yPos,width,length)
 
                     pygame.draw.rect(self.screen,pygame.Color(light.get_rgb()), light_rect)
+    
     def draw(self):
         self.draw_background()
         # Draw roads

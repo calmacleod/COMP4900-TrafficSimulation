@@ -4,6 +4,7 @@ class Road:
     def __init__(self, direction, offset):
         self.direction = direction
         self.offset = offset
+        self.travelled = 0
         self.vehicles = []
         self.lights   = []
         if self.direction == 1:
@@ -32,10 +33,10 @@ class Road:
         self.lights.append(light)
 
     def vehicle_finished(self, vehicle):
+        self.travelled += vehicle.capacity
         self.vehicles.remove(vehicle)
         if(len(self.vehicles) > 0):
             self.vehicles[0].lead = None
-
         del vehicle
 
         

@@ -6,6 +6,7 @@ class Vehicle:
     def __init__(self, road, lead = None):
         self.first_car = (lead == None)
         self.road = road
+        self.capacity = 4
 
         if not self.first_car:
             self.lead = lead
