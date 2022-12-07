@@ -32,6 +32,12 @@ class Road:
     def add_traffic_light(self, light):
         self.lights.append(light)
 
+    def can_create_car(self):
+        for v in self.vehicles:
+            if(v.pos < v.l):
+                return False
+        return True
+
     def vehicle_finished(self, vehicle):
         self.travelled += vehicle.capacity
         self.vehicles.remove(vehicle)

@@ -20,13 +20,14 @@ class World:
 
     def add_vehicle(self, road):
         #Chance of bus
-        busProb = random.randrange(1,100)
-        if(busProb < 10):
-            v = Bus(road,road.get_last_vehicle())
-        else:
-            v = Car(road,road.get_last_vehicle())
-        self.vehicles.append(v)
-        road.add_vehicle(v)
+        if(road.can_create_car()):
+            busProb = random.randrange(1,100)
+            if(busProb < 10):
+                v = Bus(road,road.get_last_vehicle())
+            else:
+                v = Car(road,road.get_last_vehicle())
+            self.vehicles.append(v)
+            road.add_vehicle(v)
 
     def add_intersection(self,road1,road2):
         intersection = Intersection(road1,road2)

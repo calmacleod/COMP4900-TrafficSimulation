@@ -12,11 +12,11 @@ class Vehicle:
             self.lead = lead
         
         self.pos = 0
-        self.delta = 2
+        self.delta = 4
         self.x = 0
         self.l = 40
         
-        self.s0 = 90
+        self.s0 = 5
         self.v_max = 5
         self.v = self.v_max
 
@@ -27,33 +27,50 @@ class Vehicle:
             self.s = 1000
             self.diff_v = 0
 
-        self.T = 1
-        self.a = 10
-        self.b = 10
+        self.T = 8
+        self.a = 1
+        self.b = 0.1
 
         self.root_constant = math.sqrt(2 * self.a * self.b)
     
     def update_acceleration(self):
         # - Update based on lead car
         if not self.first_car:
-            self.s = self.lead.pos - self.pos -  - self.l
-            self.diff_v = self.v - self.lead.v
+            self.s = self.lead.pos - (self.pos + self.l)
+            self.diff_v = self.v - self.lead.v 
         else:
             self.s = 1000
             self.diff_v = 0
 
-        # If (Light yellow & V^2 / 2b > distance to light):
-        if (self.road.lights[0].get_state() == LIGHT_COLOR.AMBER and self.pos < self.road.lights[0].position):
-            if (self.v**2 / 2*self.b) > (self.road.lights[0].position - self.pos):
-                self.s = self.road.lights[0].position - self.pos - self.l
-                self.diff_v = self.v
+        light_state = self.road.lights[0].get_state()
 
-        if (self.road.lights[0].get_state() == LIGHT_COLOR.RED and self.pos < self.road.lights[0].position):
+        stop_line = self.road.lights[0].get_stop_distance()
+
+        front_vehicle = self.pos + self.l
+            
+        if not self.first_car:
+            distance_to_lead = self.lead.pos - (self.pos + self.l)
+
+        # If (Light yellow & V^2 / 2b > distance to light):
+        if (light_state == LIGHT_COLOR.AMBER and front_vehicle < stop_line):
+            distance_to_light = stop_line - front_vehicle 
             if self.first_car:
-                self.s = self.road.lights[0].position - self.pos - 5
+                if self.calculate_can_stop(distance_to_light):
+                    self.s = stop_line - front_vehicle
+                    self.diff_v = self.v
+            elif distance_to_light < distance_to_lead:
+                if self.calculate_can_stop(distance_to_light):
+                    self.s = stop_line - front_vehicle
+                    self.diff_v = self.v
+
+        if (light_state == LIGHT_COLOR.RED and front_vehicle < stop_line):
+            distance_to_light = stop_line - front_vehicle 
+            if self.first_car:
+                self.s = stop_line - front_vehicle
                 self.diff_v = self.v
-            elif (self.road.lights[0].position - self.pos) < (self.lead.pos - self.pos):
-                self.s = self.road.lights[0].position - self.pos - 5
+            elif(distance_to_light < distance_to_lead):
+                print(distance_to_light, " ",distance_to_lead)
+                self.s = stop_line - front_vehicle
                 self.diff_v = self.v
 
 
@@ -71,6 +88,14 @@ class Vehicle:
     def should_delete(self):
         return self.pos > self.road.length
         
+    def calculate_can_stop(self,distance_to_light):
+        sStar = self.s0 + (self.v * self.T) + ((self.v * self.v) / self.root_constant)
+
+        a_free_road = self.a * (1- (self.v / self.v_max)**self.delta)
+        a_interatcion = -self.a * (sStar / distance_to_light)**2
+
+        return (a_free_road + a_interatcion) <= 0
+
     def update(self):
         if(not self.first_car and self.lead is None):
             self.first_car = True

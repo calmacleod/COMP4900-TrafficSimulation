@@ -6,3 +6,4 @@ class Bus(Vehicle):
         super().__init__(road,lead)
         self.l = 80
         self.capacity = random.randrange(75,100)
+        
