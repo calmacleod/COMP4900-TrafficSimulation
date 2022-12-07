@@ -1,6 +1,7 @@
 from Road import Road
 from Vehicle import Vehicle
 from Intersection import Intersection
+import CONSTANTS
 import random
 class World:
     def __init__(self):
@@ -44,9 +45,13 @@ class World:
         for i in self.intersections:
             i.update()
 
-        for v in self.vehicles:
-            #TODO - Implement update
-            v.update()
+        for r in self.roads:
+            r.update()
+            r.clear_vehicles()
+
+            
+
+        
     
     
 

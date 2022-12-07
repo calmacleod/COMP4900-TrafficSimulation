@@ -1,4 +1,5 @@
 import math
+import CONSTANTS
 from TrafficLight import LIGHT_COLOR
 
 class Vehicle:
@@ -40,6 +41,12 @@ class Vehicle:
             self.s = 1000
             self.diff_v = 0
 
+        # If (Light yellow & V^2 / 2b > distance to light):
+        if (self.road.lights[0].get_state() == LIGHT_COLOR.AMBER and self.pos < self.road.lights[0].position):
+            if (self.v**2 / 2*self.b) > (self.road.lights[0].position - self.pos):
+                self.s = self.road.lights[0].position - self.pos - self.l
+                self.diff_v = self.v
+
         if (self.road.lights[0].get_state() == LIGHT_COLOR.RED and self.pos < self.road.lights[0].position):
             if self.first_car:
                 self.s = self.road.lights[0].position - self.pos - 5
@@ -48,11 +55,6 @@ class Vehicle:
                 self.s = self.road.lights[0].position - self.pos - 5
                 self.diff_v = self.v
 
-        # If (Light yellow & V^2 / 2b > distance to light):
-        if (self.road.lights[0].get_state() == LIGHT_COLOR.AMBER and self.pos < self.road.lights[0].position):
-            if (self.v**2 / 2*self.b) > (self.road.lights[0].position - self.pos):
-                self.s = self.road.lights[0].position - self.pos - 5
-                self.diff_v = self.v
 
 
         #Perform accleration calculation
@@ -65,7 +67,13 @@ class Vehicle:
         
         return acc
     
+    def should_delete(self):
+        return self.pos > self.road.length
+        
     def update(self):
+        if(not self.first_car and self.lead is None):
+            self.first_car = True
+
         accel = self.update_acceleration()
         
         self.v += accel
