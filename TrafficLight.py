@@ -5,6 +5,7 @@ class TrafficLight:
     def __init__(self,position):
         self.state = LIGHT_COLOR.GREEN
         self.position = position
+        self.control = None
 
     def get_state(self):
         return self.state
@@ -14,6 +15,9 @@ class TrafficLight:
 
     def get_stop_distance(self):
         return self.position - CONSTANTS.ROAD_WIDTH//2 
+
+    def request_priority(self):
+        self.control.request_priority(self)
 
     def get_rgb(self):
         if(self.state == LIGHT_COLOR.RED):

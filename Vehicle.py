@@ -69,7 +69,6 @@ class Vehicle:
                 self.s = stop_line - front_vehicle
                 self.diff_v = self.v
             elif(distance_to_light < distance_to_lead):
-                print(distance_to_light, " ",distance_to_lead)
                 self.s = stop_line - front_vehicle
                 self.diff_v = self.v
 

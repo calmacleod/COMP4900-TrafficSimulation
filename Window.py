@@ -6,7 +6,6 @@ class Window:
     def __init__(self,world: World):
         self.default_config()
         self.world = world
-        print(type(self.world))
 
     def default_config(self):
         self.width = 1000
