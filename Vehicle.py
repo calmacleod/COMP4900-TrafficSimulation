@@ -16,8 +16,8 @@ class Vehicle:
         self.x = 0
         self.l = 40
         
-        self.s0 = 5
-        self.v_max = 5
+        self.s0 = CONSTANTS.STOPPING_DISTANCE
+        self.v_max = CONSTANTS.MAX_SPEED
         self.v = self.v_max
 
         if not self.first_car:
@@ -27,9 +27,9 @@ class Vehicle:
             self.s = 1000
             self.diff_v = 0
 
-        self.T = 8
-        self.a = 0.1
-        self.b = 0.1
+        self.T = CONSTANTS.REACTION_TIME
+        self.a = CONSTANTS.ACCELERATION
+        self.b = CONSTANTS.BRAKING
 
         self.root_constant = math.sqrt(2 * self.a * self.b)
     

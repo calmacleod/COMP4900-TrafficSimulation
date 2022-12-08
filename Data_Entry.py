@@ -15,6 +15,9 @@ class Data_Entry:
     def data_entry(self):
         layout = [
             [sg.Text('Main Menu:')],
+            [sg.Text('Road Width', size=(15,1)), sg.InputText(key='ROAD_WIDTH')],
+            [sg.Text('Screen Height', size=(15,1)), sg.InputText(key='SCREEN_HEIGHT')],
+            [sg.Text('Screen Width', size=(15,1)), sg.InputText(key='SCREEN_WIDTH')],
             [sg.Text('Delta', size=(15,1)), sg.InputText(key='DELTA')],
             [sg.Text('Stopping Distance', size=(15,1)), sg.InputText(key='STOPPING_DISTANCE')],
             [sg.Text('Max Speed', size=(15,1)), sg.InputText(key='MAX_SPEED')],
@@ -35,7 +38,9 @@ class Data_Entry:
 
         for key,value in self.get_book_variable_module_name("CONSTANTS").items():
             if key in window.key_dict.keys():
-                window[key].update(value)
+                if(key == "BUS_CAPACITY_RANGE"):
+                    print(value)
+                window[key].update(str(value))
         
         while True:
             event, values = window.read()

@@ -6,10 +6,11 @@ class Window:
     def __init__(self,world: World):
         self.default_config()
         self.world = world
+        self.width = CONSTANTS.SCREEN_WIDTH
+        self.height = CONSTANTS.SCREEN_HEIGHT
+        self.road_width = CONSTANTS.ROAD_WIDTH
 
     def default_config(self):
-        self.width = 1000
-        self.height = 750
         self.bg_colors = (255,255,255)
 
         self.fps  = 60
@@ -52,7 +53,7 @@ class Window:
         self.screen.fill(self.bg_colors)
 
     def draw_roads(self):
-        width = 30
+        width = self.road_width
 
         for r in self.world.roads:
             # Road to the right
@@ -71,18 +72,18 @@ class Window:
             pygame.draw.rect(self.screen,pygame.Color(115, 125, 118), roadRect)
 
     def draw_cars(self):
-        width = 30
+        width = self.road_width
         for v in self.world.vehicles:
             if(v.road.direction == 1):
                 xPos = v.pos
                 yPos = v.road.offset - width//2
                 length = v.l
-                vehicleRect = pygame.Rect(xPos,yPos,length,30)
+                vehicleRect = pygame.Rect(xPos,yPos,length,self.road_width)
             if(v.road.direction == 2):
                 xPos = v.road.offset - width//2
                 yPos = v.pos
                 length = v.l
-                vehicleRect = pygame.Rect(xPos,yPos,30,length)
+                vehicleRect = pygame.Rect(xPos,yPos,self.road_width,length)
 
             if(v.first_car):
                 color = pygame.Color(18, 39, 148)
@@ -105,7 +106,7 @@ class Window:
         self.screen.blit(text,text_rect)
 
     def draw_lights(self):
-        width = 30
+        width = self.road_width
         light_size = 10
         for r in self.world.roads:
             for light in r.lights:

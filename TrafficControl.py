@@ -1,11 +1,12 @@
 from TrafficLight import *
+import CONSTANTS
 class TrafficControl:
     def __init__(self):
         self.lights = []
         self.time = 0
 
-        self.RED_TIME = 300
-        self.YELLOW_TIME = 100
+        self.RED_TIME = CONSTANTS.RED_TIME
+        self.YELLOW_TIME = CONSTANTS.YELLOW_TIME
 
         self.red_light_timer = self.RED_TIME
         
@@ -42,7 +43,7 @@ class TrafficControl:
         self.red_light_timer = self.RED_TIME
 
     def request_priority(self,light):
-        if(self.red_light_timer > 200 or self.priority_requested or self.red_light_timer <= self.YELLOW_TIME):
+        if(self.red_light_timer > CONSTANTS.BUS_PRIORITY or self.priority_requested or self.red_light_timer <= self.YELLOW_TIME):
             return
 
         self.red_light_timer = self.YELLOW_TIME+1
