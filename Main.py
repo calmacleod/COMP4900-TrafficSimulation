@@ -1,6 +1,7 @@
 from World import World
 from Window import Window
 from Data_Entry import Data_Entry
+import SaveStats
 
 m = Data_Entry().data_entry()
 
@@ -15,3 +16,4 @@ window = Window(w)
 
 window.loop()
 
+SaveStats.get_output(w)

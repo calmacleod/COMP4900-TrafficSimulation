@@ -34,7 +34,6 @@ class Window:
 
         while running:
             #Update Simulation
-
             self.draw()
 
             pygame.display.update()
@@ -97,9 +96,6 @@ class Window:
 
         out_string = "Ticks: " + str(ticks)
         
-        for r in self.world.roads:
-            out_string += " ppl_Trav: " + str(r.travelled)
-
         text = self.text_font.render(out_string,False, (0,0,0)) 
 
         text_rect = text.get_rect()

@@ -1,13 +1,25 @@
 import CONSTANTS
 from TrafficLight import *
 from Bus import Bus
+import itertools
+
 class Road:
+    id_obj = itertools.count()
+    
     def __init__(self, direction, offset):
         self.direction = direction
         self.offset = offset
         self.travelled = 0
+
+        self.bus_trav = 0
+        self.car_trav = 0
+        
+        self.bus_pass = 0
+        self.car_pass = 0
+
         self.vehicles = []
         self.lights   = []
+        self.id = next(Road.id_obj)
         if self.direction == 1:
             self.length = CONSTANTS.SCREEN_WIDTH
         elif self.direction == 2:
@@ -43,8 +55,15 @@ class Road:
         return True
 
     def vehicle_finished(self, vehicle):
-        self.travelled += vehicle.capacity
+        if(isinstance(vehicle,Bus)):
+            self.bus_trav += 1
+            self.bus_pass += vehicle.capacity
+        else:
+            self.car_trav += 1
+            self.car_pass += vehicle.capacity
+
         self.vehicles.remove(vehicle)
+
         if(len(self.vehicles) > 0):
             self.vehicles[0].lead = None
         del vehicle

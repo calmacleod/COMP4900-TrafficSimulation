@@ -28,7 +28,7 @@ class Vehicle:
             self.diff_v = 0
 
         self.T = 8
-        self.a = 1
+        self.a = 0.1
         self.b = 0.1
 
         self.root_constant = math.sqrt(2 * self.a * self.b)
