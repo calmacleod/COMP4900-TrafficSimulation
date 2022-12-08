@@ -22,9 +22,9 @@ class World:
 
     def add_vehicle(self, road):
         #Chance of bus
-        makeBus = random.random() < 0.1
+        makeBus = random.random() < CONSTANTS.BUS_PROB
         #Hardwire not great
-        hypoLength = 80 if makeBus else 40 
+        hypoLength = CONSTANTS.BUS_LENGTH if makeBus else CONSTANTS.CAR_LENGTH
         if(road.can_create_car(hypoLength)):
             if(makeBus):
                 v = Bus(road,road.get_last_vehicle())
