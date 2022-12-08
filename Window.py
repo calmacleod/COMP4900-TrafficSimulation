@@ -41,13 +41,15 @@ class Window:
             #clock.tick(self.fps)
             clock.tick(60)
 
-
             #Handle events
             for event in pygame.event.get():
                 if event.type == pygame.K_ESCAPE:
                     running = False
                 if event.type == pygame.QUIT:
                     running = False;
+
+            if(self.world.done):
+                running = False
 
     def draw_background(self):
         self.screen.fill(self.bg_colors)

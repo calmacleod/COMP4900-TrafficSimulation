@@ -15,6 +15,7 @@ class Data_Entry:
     def data_entry(self):
         layout = [
             [sg.Text('Main Menu:')],
+            [sg.Text('Max Ticks', size=(15,1)), sg.InputText(key='MAX_TICK')],
             [sg.Text('Road Width', size=(15,1)), sg.InputText(key='ROAD_WIDTH')],
             [sg.Text('Screen Height', size=(15,1)), sg.InputText(key='SCREEN_HEIGHT')],
             [sg.Text('Screen Width', size=(15,1)), sg.InputText(key='SCREEN_WIDTH')],

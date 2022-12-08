@@ -26,3 +26,4 @@ BUS_PRIORITY = 200
 
 #World
 BUS_PROB = 0.1
+MAX_TICK = -1

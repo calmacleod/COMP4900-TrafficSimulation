@@ -12,6 +12,8 @@ class World:
             self.roads    = []
             self.intersections = []
             self.tick     = 0
+            self.max_tick = CONSTANTS.MAX_TICK
+            self.done = False
 
     def add_road(self,start,end):
         r = Road(start,end)
@@ -57,6 +59,9 @@ class World:
 
         for r in self.roads:
             r.update()
+
+        if(self.tick == self.max_tick):
+            self.done = True
 
             
 
