@@ -1,6 +1,8 @@
 from World import World
 from Window import Window
+from Data_Entry import Data_Entry
 
+m = Data_Entry().data_entry()
 
 w = World()
 
