@@ -1,15 +1,17 @@
 import CONSTANTS
 from TrafficLight import *
 from Bus import Bus
+from Car import Car
 import itertools
+import random
 
 class Road:
     id_obj = itertools.count()
     
-    def __init__(self, direction, offset):
+    def __init__(self, direction, offset,make_bus = False):
         self.direction = direction
         self.offset = offset
-        self.travelled = 0
+        self.make_bus = make_bus
 
         self.bus_trav = 0
         self.car_trav = 0
@@ -18,6 +20,7 @@ class Road:
         self.car_pass = 0
 
         self.vehicles = []
+        self.queued_vehicles = []
         self.lights   = []
         self.id = next(Road.id_obj)
         if self.direction == 1:
@@ -27,7 +30,17 @@ class Road:
 
 
     #TODO Implement
-    def update(self):
+    def update(self, tick):
+        if(tick % 50 == 0):
+            #See if we can spawn a vehicle
+            if(len(self.queued_vehicles) > 0):
+                if(self.can_create_car(self.queued_vehicles[0].l)):
+                    new_vehicle = self.queued_vehicles.pop()
+                    new_vehicle.update_lead(self.get_last_vehicle())
+                    self.vehicles.append(new_vehicle)
+            else:
+                self.add_vehicle_queue()
+
         for v in self.vehicles:
             if(isinstance(v,Bus)):
                 if v in self.first_three_vehicles(self.lights[0]) and self.lights[0].state == LIGHT_COLOR.RED:
@@ -38,8 +51,25 @@ class Road:
             if(v.should_delete()):
                 self.vehicle_finished(v)
 
+        
+
     def add_vehicle(self,vehicle):
         self.vehicles.append(vehicle)
+
+    def add_vehicle_queue(self):
+        v = None
+        if(self.make_bus):
+            if random.random() < CONSTANTS.BUS_PROB:
+                v = Bus(self,self.get_last_vehicle())
+            else:
+                v = Car(self,self.get_last_vehicle())
+        else:
+            v = Car(self,self.get_last_vehicle())
+
+        if(self.can_create_car(v.l)):
+            self.vehicles.append(v)
+        else:
+            self.queued_vehicles.append(v)
 
     def get_last_vehicle(self):
         if(self.vehicles == []):
@@ -51,7 +81,7 @@ class Road:
 
     def can_create_car(self,length):
         if(len(self.vehicles) > 0):
-            return self.vehicles[-1].pos >= length
+            return self.vehicles[-1].pos > length + 5
         return True
 
     def vehicle_finished(self, vehicle):

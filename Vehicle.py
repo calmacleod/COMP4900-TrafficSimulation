@@ -84,6 +84,18 @@ class Vehicle:
         
         return acc
     
+    def update_lead(self,new_lead):
+        if(new_lead is None):
+            self.first_car = True
+            self.lead = None
+            self.s = 1000
+            self.diff_v = 0
+        else:
+            self.first_car = False
+            self.lead = new_lead
+            self.s = self.pos - new_lead.pos - self.l
+            self.diff_v = self.v - new_lead.v
+
     def should_delete(self):
         return self.pos > self.road.length
         

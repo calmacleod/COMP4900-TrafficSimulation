@@ -16,6 +16,16 @@ def get_book_variable_module_name(module_name):
         book = {key: value for key, value in module.__dict__.items() if not (key.startswith('__') or key.startswith('_'))}
     return book
 
+def uniquify(path):
+    filename, extension = os.path.splitext(path)
+    counter = 1
+
+    while os.path.exists(path):
+        path = filename + " (" + str(counter) + ")" + extension
+        counter += 1
+
+    return path
+
 def get_formatted(key, value):
     if(isinstance(value, tuple)):
         value = ",".join(map(str,value))
@@ -24,7 +34,10 @@ def get_formatted(key, value):
 
 def get_output(world: World):
     timestr = time.strftime("%Y%m%d-%H%M%S")
-    f = open("results/results_"+timestr, "w")
+
+    file_name = uniquify("results/results_"+timestr)
+
+    f = open(file_name, "w")
 
     f.write("STATS: \n")
 

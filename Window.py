@@ -75,7 +75,11 @@ class Window:
 
     def draw_cars(self):
         width = self.road_width
-        for v in self.world.vehicles:
+
+        vehicles = self.world.roads[0].vehicles + self.world.roads[1].vehicles
+
+
+        for v in vehicles:
             if(v.road.direction == 1):
                 xPos = v.pos
                 yPos = v.road.offset - width//2
