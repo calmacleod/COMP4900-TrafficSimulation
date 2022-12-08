@@ -52,9 +52,7 @@ class Data_Entry:
                     elif key in ["ACCELERATION","BRAKING","BUS_PROB"]:
                         setattr(CONSTANTS,key,float(value))
                     else:
-                        setattr(CONSTANTS,key,int(value))
-                print(self.get_book_variable_module_name("CONSTANTS"))
-                    
+                        setattr(CONSTANTS,key,int(value))                    
                 break
 
         window.close()
