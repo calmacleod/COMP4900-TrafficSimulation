@@ -129,4 +129,4 @@ dmypy.json
 .pyre/
 
 # Txt files
-results/*.txt
+/results
