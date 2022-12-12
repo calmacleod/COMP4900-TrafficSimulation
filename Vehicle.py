@@ -42,38 +42,39 @@ class Vehicle:
             self.s = 1000
             self.diff_v = 0
 
-        light_state = self.road.lights[0].get_state()
-
-        stop_line = self.road.lights[0].get_stop_distance()
-
         front_vehicle = self.pos + self.l
-            
+
         if not self.first_car:
             distance_to_lead = self.lead.pos - (self.pos + self.l)
 
-        # If (Light yellow & V^2 / 2b > distance to light):
-        if (light_state == LIGHT_COLOR.AMBER and front_vehicle < stop_line):
-            distance_to_light = stop_line - front_vehicle 
-            if self.first_car:
-                if self.calculate_can_stop(distance_to_light):
+        traffic_light = self.road.get_light(self)
+
+        if traffic_light is not None:
+            
+            light_state = traffic_light.get_state()
+            stop_line = traffic_light.get_stop_distance()
+
+            # If (Light yellow & V^2 / 2b > distance to light):
+            if (light_state == LIGHT_COLOR.AMBER and front_vehicle < stop_line):
+                distance_to_light = stop_line - front_vehicle 
+                if self.first_car:
+                    if self.calculate_can_stop(distance_to_light):
+                        self.s = stop_line - front_vehicle
+                        self.diff_v = self.v
+                elif distance_to_light < distance_to_lead:
+                    if self.calculate_can_stop(distance_to_light):
+                        self.s = stop_line - front_vehicle
+                        self.diff_v = self.v
+
+            if (light_state == LIGHT_COLOR.RED and front_vehicle < stop_line):
+                distance_to_light = stop_line - front_vehicle 
+                if self.first_car:
                     self.s = stop_line - front_vehicle
                     self.diff_v = self.v
-            elif distance_to_light < distance_to_lead:
-                if self.calculate_can_stop(distance_to_light):
+                elif(distance_to_light < distance_to_lead):
                     self.s = stop_line - front_vehicle
                     self.diff_v = self.v
-
-        if (light_state == LIGHT_COLOR.RED and front_vehicle < stop_line):
-            distance_to_light = stop_line - front_vehicle 
-            if self.first_car:
-                self.s = stop_line - front_vehicle
-                self.diff_v = self.v
-            elif(distance_to_light < distance_to_lead):
-                self.s = stop_line - front_vehicle
-                self.diff_v = self.v
-
-
-
+                    
         #Perform accleration calculation
         sStar = self.s0 + (self.v * self.T) + ((self.v * self.diff_v) / self.root_constant)
 

@@ -7,10 +7,12 @@ m = Data_Entry().data_entry()
 
 w = World()
 
-r1 = w.add_road(1,350,True)
-r2 = w.add_road(2,500)
+r1 = w.add_road(1,450,True)
+r2 = w.add_road(2,300)
+r3 = w.add_road(2,700)
 
 w.add_intersection(r1,r2)
+w.add_intersection(r1,r3)
 
 window = Window(w)
 

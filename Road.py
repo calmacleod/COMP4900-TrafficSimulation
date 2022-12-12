@@ -1,5 +1,6 @@
 import CONSTANTS
 from TrafficLight import *
+from Vehicle import Vehicle
 from Bus import Bus
 from Car import Car
 import itertools
@@ -78,6 +79,7 @@ class Road:
 
     def add_traffic_light(self, light):
         self.lights.append(light)
+        self.lights.sort(key=lambda x: x.position)
 
     def can_create_car(self,length):
         if(len(self.vehicles) > 0):
@@ -97,6 +99,12 @@ class Road:
         if(len(self.vehicles) > 0):
             self.vehicles[0].lead = None
         del vehicle
+
+    def get_light(self, vehicle: Vehicle):
+        for light in self.lights:
+            if(vehicle.pos < light.position + CONSTANTS.ROAD_WIDTH//2):
+                return light
+        return None
 
     def first_three_vehicles(self,traffic_light):
         light_pos = traffic_light.get_stop_distance()
