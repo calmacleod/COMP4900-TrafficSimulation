@@ -31,7 +31,7 @@ ROAD:
 	-> Traffic light 
 	
 	DOES:
-	-> Change from Red/Amber/Greenm
+	-> Change from Red/Amber/Green
 	
 	
 TRAFFIC CONTROL:
