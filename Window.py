@@ -76,7 +76,12 @@ class Window:
     def draw_cars(self):
         width = self.road_width
 
-        vehicles = self.world.roads[0].vehicles + self.world.roads[1].vehicles
+        vehicles = []
+
+        for road in self.world.roads:
+            vehicles = vehicles + road.vehicles
+
+        #vehicles = self.world.roads[0].vehicles + self.world.roads[1].vehicles
 
 
         for v in vehicles:
