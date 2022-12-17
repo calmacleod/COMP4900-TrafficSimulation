@@ -11,7 +11,7 @@ class Vehicle:
         if not self.first_car:
             self.lead = lead
         
-        self.pos = 0
+        self.pos = -100
         self.delta = 4
         self.x = 0
         self.l = 40

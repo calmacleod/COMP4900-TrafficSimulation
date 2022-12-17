@@ -24,9 +24,9 @@ class Road:
         self.queued_vehicles = []
         self.lights   = []
         self.id = next(Road.id_obj)
-        if self.direction == 1:
+        if self.direction == 1 or self.direction == 3:
             self.length = CONSTANTS.SCREEN_WIDTH
-        elif self.direction == 2:
+        elif self.direction == 2 or self.direction == 4:
             self.length = CONSTANTS.SCREEN_HEIGHT
 
 

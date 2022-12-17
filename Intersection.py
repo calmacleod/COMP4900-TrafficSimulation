@@ -10,20 +10,21 @@ class Intersection:
         elif(road_1.direction == road_2.direction):
             return #Both in the same direction
 
-        roads = [road_1,road_2]
-        xPos = 0
-        yPos = 0
-        
-        for road in roads:
-            if(road.direction == 1 or road.direction == 3):
-                xPos = road.offset
-            if(road.direction == 2 or road.direction == 4):
-                yPos = road.offset
+        #Assume road_1 = 1 or 3 and road_2 = 2 or 4
+        if(road_1.direction == 1):
+            xPos = road_2.offset
+        elif(road_1.direction == 3):
+            xPos = CONSTANTS.SCREEN_WIDTH - road_2.offset
+
+        if(road_2.direction == 2):
+            yPos = road_1.offset
+        elif(road_2.direction == 4):
+            yPos = CONSTANTS.SCREEN_HEIGHT - road_1.offset
 
         self.position = (xPos,yPos)
 
-        road_1_light = TrafficLight(road_2.offset)
-        road_2_light = TrafficLight(road_1.offset)
+        road_1_light = TrafficLight(xPos)
+        road_2_light = TrafficLight(yPos)
 
         road_1.add_traffic_light(road_1_light)
         road_2.add_traffic_light(road_2_light)

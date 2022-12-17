@@ -59,13 +59,13 @@ class Window:
 
         for r in self.world.roads:
             # Road to the right
-            if(r.direction == 1):
+            if(r.direction == 1 or r.direction == 3):
                 xPos = 0
                 yPos = r.offset - width//2
                 length = self.width
                 roadRect = pygame.Rect(xPos,yPos,length,width)
 
-            elif(r.direction == 2):
+            elif(r.direction == 2 or r.direction == 4):
                 xPos = r.offset - width//2
                 yPos = 0
                 length = self.height
@@ -81,18 +81,33 @@ class Window:
         for road in self.world.roads:
             vehicles = vehicles + road.vehicles
 
-        #vehicles = self.world.roads[0].vehicles + self.world.roads[1].vehicles
-
 
         for v in vehicles:
             if(v.road.direction == 1):
                 xPos = v.pos
                 yPos = v.road.offset - width//2
                 length = v.l
+                #Spawn off screen vehicles
+                if(xPos + length < 0):
+                    continue  
                 vehicleRect = pygame.Rect(xPos,yPos,length,self.road_width)
-            if(v.road.direction == 2):
+            elif(v.road.direction == 2):
                 xPos = v.road.offset - width//2
                 yPos = v.pos
+                length = v.l
+                vehicleRect = pygame.Rect(xPos,yPos,self.road_width,length)
+            elif(v.road.direction == 3):
+                length = v.l
+                yPos = v.road.offset - width//2
+                xPos = CONSTANTS.SCREEN_WIDTH - (v.pos+length)
+
+                if(xPos > CONSTANTS.SCREEN_WIDTH):
+                    continue
+
+                vehicleRect = pygame.Rect(xPos,yPos,length,self.road_width)
+            elif(v.road.direction == 4):
+                xPos = v.road.offset - width//2 
+                yPos = CONSTANTS.SCREEN_HEIGHT - v.pos - v.l
                 length = v.l
                 vehicleRect = pygame.Rect(xPos,yPos,self.road_width,length)
 
@@ -127,12 +142,23 @@ class Window:
                     length = light_size
                     light_rect = pygame.Rect(xPos,yPos,length,width)
                     pygame.draw.rect(self.screen,pygame.Color(light.get_rgb()), light_rect)
-                if(r.direction == 2):
+                elif(r.direction == 2):
                     yPos = light.position + width//2
                     xPos = r.offset - width//2
                     length = light_size
                     light_rect = pygame.Rect(xPos,yPos,width,length)
-
+                    pygame.draw.rect(self.screen,pygame.Color(light.get_rgb()), light_rect)
+                elif(r.direction == 3):
+                    xPos = (CONSTANTS.SCREEN_WIDTH - light.position) - (width//2 + light_size)
+                    yPos = r.offset - width//2
+                    length = light_size
+                    light_rect = pygame.Rect(xPos,yPos,length,width)
+                    pygame.draw.rect(self.screen,pygame.Color(light.get_rgb()), light_rect)
+                elif(r.direction == 4):
+                    yPos = (CONSTANTS.SCREEN_HEIGHT - light.position) - (width//2 + light_size)
+                    xPos = r.offset - width//2
+                    length = light_size
+                    light_rect = pygame.Rect(xPos,yPos,width,length)
                     pygame.draw.rect(self.screen,pygame.Color(light.get_rgb()), light_rect)
     
     def draw(self):
