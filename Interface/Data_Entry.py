@@ -24,6 +24,7 @@ class Data_Entry:
             [sg.Text('Max Speed', size=(15,1)), sg.InputText(key='MAX_SPEED')],
             [sg.Text('Reaction Time', size=(15,1)), sg.InputText(key='REACTION_TIME')],
             [sg.Text('Accleration', size=(15,1)), sg.InputText(key='ACCELERATION')],
+            [sg.Text('Braking', size=(15,1)), sg.InputText(key='BRAKING')],
             [sg.Text('Bus Length', size=(15,1)), sg.InputText(key='BUS_LENGTH')],
             [sg.Text('Car Length', size=(15,1)), sg.InputText(key='CAR_LENGTH')],
             [sg.Text('Bus Capacity Range', size=(15,1)), sg.InputText(key='BUS_CAPACITY_RANGE')],
@@ -47,7 +48,7 @@ class Data_Entry:
                 for key,value in values.items():
                     if key in ["BUS_CAPACITY_RANGE","CAR_CAPACITY_RANGE"]:
                         setattr(CONSTANTS,key,tuple([int(i) for i in value.strip("()").split(",")]) )
-                    elif key in ["ACCELERATION","BRAKING","BUS_PROB"]:
+                    elif key in ["ACCELERATION","BRAKING","BUS_PROB","MAX_SPEED","BRAKING"]:
                         setattr(CONSTANTS,key,float(value))
                     else:
                         setattr(CONSTANTS,key,int(value))                    

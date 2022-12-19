@@ -5,14 +5,14 @@ SCREEN_WIDTH  = 1000
 
 #Vehicle
 DELTA             = 4
-STOPPING_DISTANCE = 5
-MAX_SPEED         = 5
-REACTION_TIME     = 8
-ACCELERATION      = 0.1
+STOPPING_DISTANCE = 10
+MAX_SPEED         = 2.5
+REACTION_TIME     = 18
+ACCELERATION      = 0.8
 BRAKING           = 0.1
 
 #Bus
-BUS_LENGTH         = 80
+BUS_LENGTH         = 104
 BUS_CAPACITY_RANGE = (75,100)
 
 #Car
