@@ -130,3 +130,4 @@ dmypy.json
 
 # Txt files
 /results
+/OldRuns
