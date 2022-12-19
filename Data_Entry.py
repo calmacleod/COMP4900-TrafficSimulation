@@ -39,8 +39,6 @@ class Data_Entry:
 
         for key,value in self.get_book_variable_module_name("CONSTANTS").items():
             if key in window.key_dict.keys():
-                if(key == "BUS_CAPACITY_RANGE"):
-                    print(value)
                 window[key].update(str(value))
         
         while True:

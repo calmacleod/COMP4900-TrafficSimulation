@@ -114,7 +114,12 @@ class Window:
             if(v.first_car):
                 color = pygame.Color(18, 39, 148)
             else:
-                color = pygame.Color(235, 52, 82)
+                if(v.type == 1):
+                    color = pygame.Color(173, 150, 59)
+                elif(v.type == 2):
+                    color = pygame.Color(59, 173, 95)
+                else:
+                    color = pygame.Color(235, 52, 82)
             pygame.draw.rect(self.screen,color, vehicleRect)
 
     def draw_stats(self):

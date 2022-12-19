@@ -3,7 +3,7 @@ from Window import Window
 from Data_Entry import Data_Entry
 import SaveStats
 
-m = Data_Entry().data_entry()
+Data_Entry().data_entry()
 
 w = World()
 

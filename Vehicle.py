@@ -1,5 +1,6 @@
 import math
 import CONSTANTS
+import random
 from TrafficLight import LIGHT_COLOR
 
 class Vehicle:
@@ -7,6 +8,7 @@ class Vehicle:
         self.first_car = (lead == None)
         self.road = road
         self.capacity = 4
+        self.type = 0
 
         if not self.first_car:
             self.lead = lead
@@ -107,6 +109,27 @@ class Vehicle:
         a_interatcion = -self.a * (sStar / distance_to_light)**2
 
         return (a_free_road + a_interatcion) <= 0
+
+    def make_aggressive(self):
+        self.type = 1
+        self.a  = round(self.a*1.2,2)
+        self.b  = round(self.b*1.2,2)
+        self.s0 = round(self.s0*0.5,2)
+
+    def make_passive(self):
+        self.type = 2
+        self.a  = round(self.a*0.8,2)
+        self.b  = round(self.b*0.8,2)
+        self.s0 = round(self.s0*1.5,2)
+        self.T  = round(self.T*1.3,2)
+
+    def assign_type(self):
+        #50% NORMAL | 25% Aggressive | 25% Passive
+        prob = random.random()
+        if(prob > 0.5 and prob < 0.75):
+            self.make_aggressive()
+        elif(prob > 0.75):
+            self.make_passive()
 
     def update(self):
         if(not self.first_car and self.lead is None):

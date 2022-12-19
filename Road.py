@@ -44,7 +44,7 @@ class Road:
 
         for v in self.vehicles:
             if(isinstance(v,Bus)):
-                if v in self.first_three_vehicles(self.lights[0]) and self.lights[0].state == LIGHT_COLOR.RED:
+                if v in self.first_n_vehicles(self.lights[0]) and self.lights[0].state == LIGHT_COLOR.RED:
                     self.lights[0].request_priority()
 
             v.update()
@@ -64,6 +64,7 @@ class Road:
                 v = Bus(self,self.get_last_vehicle())
             else:
                 v = Car(self,self.get_last_vehicle())
+                v.assign_type()
         else:
             v = Car(self,self.get_last_vehicle())
 
@@ -106,7 +107,7 @@ class Road:
                 return light
         return None
 
-    def first_three_vehicles(self,traffic_light):
+    def first_n_vehicles(self,traffic_light):
         light_pos = traffic_light.get_stop_distance()
         end_index = -1
 
