@@ -5,6 +5,7 @@ from Simulation.Car import Car
 from Simulation.Intersection import Intersection
 import Simulation.CONSTANTS as CONSTANTS
 import random
+import time
 class World:
     def __init__(self):
             self.vehicles = []
@@ -14,6 +15,7 @@ class World:
             self.tick     = 0
             self.max_tick = CONSTANTS.MAX_TICK
             self.done = False
+            self.time_mark = time.time()
 
     def add_road(self,start,end,make_bus = False):
         r = Road(start,end,make_bus)
@@ -79,6 +81,12 @@ class World:
             r.update(self.tick)
 
         self.tick += 1
+
+        if(self.tick % 10_000 == 0):
+            temp_time = time.time()
+            elapsed = temp_time - self.time_mark
+            self.time_mark = temp_time
+            print("Current Tick:",self.tick," Elapsed Time:",elapsed)
 
         if(self.tick == self.max_tick):
             self.done = True
