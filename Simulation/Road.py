@@ -10,6 +10,8 @@ class Road:
     id_obj = itertools.count()
     
     def __init__(self, direction, offset,make_bus = False):
+        self.id = next(Road.id_obj)
+
         self.direction = direction
         self.offset = offset
         self.make_bus = make_bus
@@ -21,26 +23,17 @@ class Road:
         self.car_pass = 0
 
         self.vehicles = []
-        self.queued_vehicles = []
         self.lights   = []
-        self.id = next(Road.id_obj)
+        
         if self.direction == 1 or self.direction == 3:
             self.length = CONSTANTS.SCREEN_WIDTH
         elif self.direction == 2 or self.direction == 4:
             self.length = CONSTANTS.SCREEN_HEIGHT
 
 
-    #TODO Implement
     def update(self, tick):
         if(tick % 50 == 0):
-            #See if we can spawn a vehicle
-            if(len(self.queued_vehicles) > 0):
-                if(self.can_create_car(self.queued_vehicles[0].l)):
-                    new_vehicle = self.queued_vehicles.pop()
-                    new_vehicle.update_lead(self.get_last_vehicle())
-                    self.vehicles.append(new_vehicle)
-            else:
-                self.add_vehicle_queue()
+            self.add_vehicle_ignore_distance()
 
         for v in self.vehicles:
             if(isinstance(v,Bus)):
@@ -52,12 +45,7 @@ class Road:
             if(v.should_delete()):
                 self.vehicle_finished(v)
 
-        
-
-    def add_vehicle(self,vehicle):
-        self.vehicles.append(vehicle)
-
-    def add_vehicle_queue(self):
+    def add_vehicle_ignore_distance(self):
         v = None
         if(self.make_bus):
             if random.random() < CONSTANTS.BUS_PROB:
@@ -69,10 +57,14 @@ class Road:
             v = Car(self,self.get_last_vehicle())
             v.assign_type()
 
-        if(self.can_create_car(v.l)):
-            self.vehicles.append(v)
-        else:
-            self.queued_vehicles.append(v)
+        if((x := self.get_last_vehicle()) is not None):
+            #Can create car immediately
+            if x.pos > (v.s0):
+                v.pos = -v.l
+            else:
+                v.pos = x.pos - (v.l + v.s0 + 1)
+
+        self.vehicles.append(v)
 
     def get_last_vehicle(self):
         if(self.vehicles == []):
