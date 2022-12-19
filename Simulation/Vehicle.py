@@ -112,16 +112,16 @@ class Vehicle:
 
     def make_aggressive(self):
         self.type = 1
-        self.a  = round(self.a*1.2,2)
-        self.b  = round(self.b*1.2,2)
-        self.s0 = round(self.s0*0.5,2)
+        self.a  = round(self.a*1.2,3)
+        self.b  = round(self.b*1.2,3)
+        self.s0 = round(self.s0*0.5,3)
 
     def make_passive(self):
         self.type = 2
-        self.a  = round(self.a*0.8,2)
-        self.b  = round(self.b*0.8,2)
-        self.s0 = round(self.s0*1.5,2)
-        self.T  = round(self.T*1.3,2)
+        self.a  = round(self.a*0.8,3)
+        self.b  = round(self.b*0.8,3)
+        self.s0 = round(self.s0*1.5,3)
+        self.T  = round(self.T*1.3,3)
 
     def assign_type(self):
         #50% NORMAL | 25% Aggressive | 25% Passive

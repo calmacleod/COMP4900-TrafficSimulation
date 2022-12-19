@@ -33,12 +33,16 @@ for folder in subfolders:
     print(folder)
     print("Averages over",len(os.listdir(folder)),"simulations:")
     print("----------------")
+    '''
     for road in important_values.values():
         print(f"Road {road[1]} Cars:            ",road[2] // len(os.listdir(folder)))
         print(f"Road {road[1]} Cars Passengers: ",road[3] // len(os.listdir(folder)))
         print(f"Road {road[1]} Bus:             ",road[4] // len(os.listdir(folder)))
         print(f"Road {road[1]} Bus Passengers:  ",road[5] // len(os.listdir(folder)))
         print("----------------")
+    '''
+    for road in important_values.values():
+        print(road[1], road[2] // len(os.listdir(folder)),road[3] // len(os.listdir(folder)),road[4] // len(os.listdir(folder)),road[5] // len(os.listdir(folder)))
     important_values.clear()
 
 

@@ -32,7 +32,7 @@ class Road:
 
     def update(self, tick):
         if(tick % 50 == 0):
-            if(len(self.vehicles) < 75):
+            if(len(self.vehicles) < 90):
                 self.add_vehicle_ignore_distance()
 
         for v in self.vehicles:

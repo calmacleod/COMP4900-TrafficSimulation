@@ -8,8 +8,8 @@ DELTA             = 4
 STOPPING_DISTANCE = 10
 MAX_SPEED         = 2.5
 REACTION_TIME     = 18
-ACCELERATION      = 0.8
-BRAKING           = 0.1
+ACCELERATION      = 0.01
+BRAKING           = 0.01
 
 #Bus
 BUS_LENGTH         = 104
