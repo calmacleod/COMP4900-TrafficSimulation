@@ -1,16 +1,13 @@
-from World import World
+from Simulation.World import World
 from Interface.Data_Entry import Data_Entry
 import SaveStats
 
 Data_Entry().data_entry()
 
-for i in range(10):
+for i in range(1):
     w = World()
 
-    r1 = w.add_road(1,500,True)
-    r2 = w.add_road(2,500)
-
-    w.add_intersection(r1,r2)
+    w.add_4_way(465,365)
 
     while not w.done:
         w.update()

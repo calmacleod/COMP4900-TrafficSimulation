@@ -16,37 +16,39 @@ for folder in subfolders:
     road_2_car = 0
     road_2_car_pass = 0
 
+    important_values = {}
+
     for file in os.listdir(folder):
         path = os.path.join(folder, file)
         f = open(path,"r")
         var = f.read()
         f.close()
         var = var.splitlines()
-        var = list(filter(None, var))
-        keep = ["Road ID ","Travelled","Passengers",]
-        key_info = []
-        for string in var:
-            for key_word in keep:
-                if key_word in string:
-                    key_info.append(string)
-                    continue
+        #print(var)
 
-        key_info = [int(item.split(" ")[-1]) for item in key_info]
-            
-        road_1_car += key_info[1]
-        road_1_car_pass += key_info[2]
-        road_1_bus += key_info[3]
-        road_1_bus_pass += key_info[4]
-        road_2_car += key_info[6]
-        road_2_car_pass += key_info[7]
+        for line_num,line in enumerate(var):
+            if("Road ID" in line):
+                road_data = []
+                for i in range(6):
+                    road_data.append(int(var[line_num+i].split(" ")[-1]))
+
+                if(road_data[0] not in important_values):
+                    important_values[road_data[0]] = road_data
+                else:
+                    for i in range(2,6):
+                        important_values[road_data[0]][i] += road_data[i]
+            elif("Constants" in line):
+                break
+    
     print(folder)
-    print("Road 1 Cars:            ",road_1_car // len(os.listdir(folder)))
-    print("Road 1 Cars Passengers: ",road_1_car_pass // len(os.listdir(folder)))
-    print("Road 1 Bus:             ",road_1_bus // len(os.listdir(folder)))
-    print("Road 1 Bus Passengers:  ",road_1_bus_pass // len(os.listdir(folder)))
-    print("Road 2 Cars:            ",road_2_car // len(os.listdir(folder)))
-    print("Road 2 Cars Passengers: ",road_2_car_pass // len(os.listdir(folder)))
-
+    print("Averages over",len(os.listdir(folder)),"simulations:")
     print("----------------")
+    for road in important_values.values():
+        print(f"Road {road[0]} Direction        ",road[1])
+        print(f"Road {road[0]} Cars:            ",road[2] // len(os.listdir(folder)))
+        print(f"Road {road[0]} Cars Passengers: ",road[3] // len(os.listdir(folder)))
+        print(f"Road {road[0]} Bus:             ",road[4] // len(os.listdir(folder)))
+        print(f"Road {road[0]} Bus Passengers:  ",road[5] // len(os.listdir(folder)))
+        print("----------------")
 
 

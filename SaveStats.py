@@ -47,6 +47,7 @@ def get_output(world: World):
 
     for r in world.roads:
         f.write(get_formatted("Road ID",r.id))
+        f.write(get_formatted("Road Direction,",r.direction))
         f.write(get_formatted("Car Travelled",r.car_trav))
         f.write(get_formatted("Car Passengers",r.car_pass))
         f.write(get_formatted("Bus Travelled",r.bus_trav))
