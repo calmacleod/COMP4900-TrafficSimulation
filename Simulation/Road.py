@@ -30,10 +30,10 @@ class Road:
         elif self.direction == 2 or self.direction == 4:
             self.length = CONSTANTS.SCREEN_HEIGHT
 
-
     def update(self, tick):
         if(tick % 50 == 0):
-            self.add_vehicle_ignore_distance()
+            if(len(self.vehicles) < 100):
+                self.add_vehicle_ignore_distance()
 
         for v in self.vehicles:
             if(isinstance(v,Bus)):
