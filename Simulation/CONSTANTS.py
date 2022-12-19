@@ -13,7 +13,7 @@ BRAKING           = 0.1
 
 #Bus
 BUS_LENGTH         = 104
-BUS_CAPACITY_RANGE = (75,100)
+BUS_CAPACITY_RANGE = (60,80)
 
 #Car
 CAR_LENGTH         = 40
