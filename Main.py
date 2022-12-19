@@ -7,12 +7,11 @@ m = Data_Entry().data_entry()
 
 w = World()
 
-r1 = w.add_road(1,450,True)
-r2 = w.add_road(2,300)
-r3 = w.add_road(2,700)
+#Generates 4-way interection centered around coordinates
+w.add_4_way(465,365)
 
-w.add_intersection(r1,r2)
-w.add_intersection(r1,r3)
+#Generates 2-way intersection centered around coordinates
+#w.add_2_way(450,350)
 
 window = Window(w)
 

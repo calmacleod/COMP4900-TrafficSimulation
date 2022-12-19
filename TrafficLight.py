@@ -2,10 +2,11 @@ from enum import Enum
 import CONSTANTS
 
 class TrafficLight:
-    def __init__(self,position):
+    def __init__(self,position,extended=False):
         self.state = LIGHT_COLOR.GREEN
         self.position = position
         self.control = None
+        self.extended = extended
 
     def get_state(self):
         return self.state
@@ -14,7 +15,10 @@ class TrafficLight:
         self.state = new_state
 
     def get_stop_distance(self):
-        return self.position - CONSTANTS.ROAD_WIDTH//2 
+        if(self.extended):
+            return self.position - CONSTANTS.ROAD_WIDTH//2 - CONSTANTS.ROAD_WIDTH
+        else:
+            return self.position - CONSTANTS.ROAD_WIDTH//2 
 
     def request_priority(self):
         self.control.request_priority(self)
