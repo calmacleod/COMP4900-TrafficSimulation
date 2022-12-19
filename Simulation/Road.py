@@ -67,6 +67,7 @@ class Road:
                 v.assign_type()
         else:
             v = Car(self,self.get_last_vehicle())
+            v.assign_type()
 
         if(self.can_create_car(v.l)):
             self.vehicles.append(v)
