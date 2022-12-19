@@ -1,10 +1,10 @@
-from World import World
-from Car import *
-from Bus import *
-from Road import *
+from Simulation.World import World
+from Simulation.Car import *
+from Simulation.Bus import *
+from Simulation.Road import *
 import time
 from pathlib import Path
-import CONSTANTS
+import Simulation.CONSTANTS as CONSTANTS
 import os
 import os.path
 

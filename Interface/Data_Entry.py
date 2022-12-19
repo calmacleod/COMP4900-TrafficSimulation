@@ -1,5 +1,5 @@
 import PySimpleGUI as sg
-import CONSTANTS
+import Simulation.CONSTANTS as CONSTANTS
 
 class Data_Entry:
     def __init__(self):

@@ -1,6 +1,6 @@
-from Vehicle import Vehicle
+from Simulation.Vehicle import Vehicle
 import random
-import CONSTANTS
+import Simulation.CONSTANTS as CONSTANTS
 
 class Car(Vehicle):
     def __init__(self, road, lead = None):

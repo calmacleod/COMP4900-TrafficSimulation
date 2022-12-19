@@ -1,8 +1,8 @@
-import CONSTANTS
-from TrafficLight import *
-from Vehicle import Vehicle
-from Bus import Bus
-from Car import Car
+import Simulation.CONSTANTS as CONSTANTS
+from Simulation.TrafficLight import *
+from Simulation.Vehicle import Vehicle
+from Simulation.Bus import Bus
+from Simulation.Car import Car
 import itertools
 import random
 

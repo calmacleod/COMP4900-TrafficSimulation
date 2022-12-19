@@ -1,5 +1,5 @@
-from TrafficLight import TrafficLight
-from TrafficControl import *
+from Simulation.TrafficLight import TrafficLight
+from Simulation.TrafficControl import *
 
 class Intersection:
     def __init__(self,road_1,road_2,road_3=None,road_4=None):

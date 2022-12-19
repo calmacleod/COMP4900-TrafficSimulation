@@ -1,5 +1,5 @@
-from TrafficLight import *
-import CONSTANTS
+from Simulation.TrafficLight import *
+import Simulation.CONSTANTS as CONSTANTS
 class TrafficControl:
     def __init__(self):
         self.lights = [[],[]]

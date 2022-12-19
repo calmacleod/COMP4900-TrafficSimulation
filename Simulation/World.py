@@ -1,9 +1,9 @@
-from Road import Road
-from Vehicle import Vehicle
-from Bus import Bus
-from Car import Car
-from Intersection import Intersection
-import CONSTANTS
+from Simulation.Road import Road
+from Simulation.Vehicle import Vehicle
+from Simulation.Bus import Bus
+from Simulation.Car import Car
+from Simulation.Intersection import Intersection
+import Simulation.CONSTANTS as CONSTANTS
 import random
 class World:
     def __init__(self):

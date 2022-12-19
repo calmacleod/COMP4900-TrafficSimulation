@@ -1,7 +1,7 @@
 import math
-import CONSTANTS
+import Simulation.CONSTANTS as CONSTANTS
 import random
-from TrafficLight import LIGHT_COLOR
+from Simulation.TrafficLight import LIGHT_COLOR
 
 class Vehicle:
     def __init__(self, road, lead = None):

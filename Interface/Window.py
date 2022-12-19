@@ -1,7 +1,10 @@
 import pygame
-import CONSTANTS
-from World import World
-from Road  import Road
+import Simulation.CONSTANTS as CONSTANTS
+from Simulation.World import World
+from Simulation.Road  import Road
+import sys
+sys.path.append('../')
+
 class Window:
     def __init__(self,world: World):
         self.default_config()

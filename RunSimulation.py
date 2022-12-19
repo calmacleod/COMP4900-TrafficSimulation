@@ -1,5 +1,5 @@
 from World import World
-from Data_Entry import Data_Entry
+from Interface.Data_Entry import Data_Entry
 import SaveStats
 
 Data_Entry().data_entry()

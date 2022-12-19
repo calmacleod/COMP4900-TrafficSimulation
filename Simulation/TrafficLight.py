@@ -1,5 +1,5 @@
 from enum import Enum
-import CONSTANTS
+import Simulation.CONSTANTS as CONSTANTS
 
 class TrafficLight:
     def __init__(self,position,extended=False):

@@ -1,6 +1,6 @@
-from World import World
-from Window import Window
-from Data_Entry import Data_Entry
+from Simulation.World import World
+from Interface.Window import Window
+from Interface.Data_Entry import Data_Entry
 import SaveStats
 
 Data_Entry().data_entry()
