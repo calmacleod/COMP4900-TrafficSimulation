@@ -1,20 +1,23 @@
 from Simulation.World import World
-from Interface.Data_Entry import Data_Entry
 import Simulation.CONSTANTS
 import SaveStats
 import os
 import shutil
+from random import shuffle
 
-#Constant
-Simulation.CONSTANTS.MAX_TICK   = 60_000
+#Set control simulation constants
+Simulation.CONSTANTS.MAX_TICK   = 100_000
 Simulation.CONSTANTS.RED_TIME   = 700
 Simulation.CONSTANTS.BUS_PROB   = 0.05
 
-priority_range = [100,150,200,250,300,350,400,450,500]
+#Configure Priorities to be tested
+priority_range = [100,150,200,250,300,350,400,450,500,550,600]
+shuffle(priority_range)
 
 for prio in priority_range:
     Simulation.CONSTANTS.BUS_PRIORITY = prio
-    for i in range(15):
+    #Range determines number of repititions
+    for i in range(60):
         w = World()
         w.add_4_way(465,365)
         while not w.done:
