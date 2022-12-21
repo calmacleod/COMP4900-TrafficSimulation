@@ -57,7 +57,8 @@ class Road:
             v = Car(self,self.get_last_vehicle())
             v.assign_type()
 
-        if((x := self.get_last_vehicle()) is not None):
+        x = self.get_last_vehicle()
+        if x is not None:
             #Can create car immediately
             if x.pos > (v.s0):
                 v.pos = -v.l
