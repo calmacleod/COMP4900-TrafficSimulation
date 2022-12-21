@@ -5,9 +5,9 @@ import os
 
 subfolders = [ f.path for f in os.scandir("./results") if f.is_dir() ]
 
-print(subfolders)
+print(sorted(subfolders))
 
-for folder in subfolders:
+for folder in sorted(subfolders):
     important_values = {}
 
     for file in os.listdir(folder):
@@ -33,16 +33,11 @@ for folder in subfolders:
     print(folder)
     print("Averages over",len(os.listdir(folder)),"simulations:")
     print("----------------")
-    '''
     for road in important_values.values():
         print(f"Road {road[1]} Cars:            ",road[2] // len(os.listdir(folder)))
         print(f"Road {road[1]} Cars Passengers: ",road[3] // len(os.listdir(folder)))
         print(f"Road {road[1]} Bus:             ",road[4] // len(os.listdir(folder)))
         print(f"Road {road[1]} Bus Passengers:  ",road[5] // len(os.listdir(folder)))
         print("----------------")
-    '''
-    for road in important_values.values():
-        print(road[1], road[2] // len(os.listdir(folder)),road[3] // len(os.listdir(folder)),road[4] // len(os.listdir(folder)),road[5] // len(os.listdir(folder)))
-    important_values.clear()
 
 
